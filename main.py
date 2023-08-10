@@ -1,8 +1,8 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
-from db import get_db
+from src.database.db import get_db
 
 
 app = FastAPI()
@@ -10,7 +10,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to FastAPI!"}
+    return {"message": "Application started"}
 
 
 
