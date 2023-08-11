@@ -4,6 +4,8 @@ from sqlalchemy.orm import Session
 
 from src.database.db import get_db
 
+from src.routes import contacts
+
 
 app = FastAPI()
 
@@ -12,6 +14,7 @@ app = FastAPI()
 def read_root():
     return {"message": "Application started"}
 
+app.include_router(contacts.router, prefix='/api')
 
 
 
