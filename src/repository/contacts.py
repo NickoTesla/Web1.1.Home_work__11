@@ -15,7 +15,7 @@ async def get_contact(contact_id: int, db: Session) -> Contact:
 
 
 async def create_contact(body: ContactBase, db: Session) -> Contact:
-    contact = Contact(title=body.title, description=body.description)
+    contact = Contact(first_name=body.first_name, last_name=body.last_name, email=body.email, phone_number=body.phone_number, birth_date=body.birth_date, additional_data=body.additional_data)
     db.add(contact)
     db.commit()
     db.refresh(contact)
@@ -33,9 +33,12 @@ async def remove_contact(contact_id: int, db: Session) -> Contact | None:
 async def update_contact(contact_id: int, body: ContactUpdate, db: Session) -> Contact | None:
     contact = db.query(Contact).filter(Contact.id == contact_id).first()
     if contact:
-        contact.title = body.title
-        contact.description = body.description
-        contact.done = body.done
+        contact.first_name = body.first_name
+        contact.last_name = body.last_name
+        contact.email = body.email
+        contact.phone_number = body.phone_number
+        contact.birth_date = body.birth_date
+        contact.additional_data = body.additional_data
         db.commit()
     return contact
 
